@@ -1,4 +1,4 @@
-import { fetchHandler } from './fetch'
+import { fetchHandler } from '../app/fetch'
 
 test('gets mojombo from list of users', async () => {
   const fetchedData = await fetchHandler('https://api.github.com/users')
