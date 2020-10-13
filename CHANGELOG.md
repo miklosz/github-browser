@@ -7,3 +7,9 @@ This is not a 100% changelog. Treat it as a description and log of the coding pr
 2. Inital cleanup - adding missing packages, cleaning readme etc
 3. Fetch handler for calls to GitHub API added. No axios, no libs, pure JS fetch
 4. Components created, routing added
+5. Tests added for components
+6. Redux added - store, reducers, actions
+7. Fetched data stored in redux store
+8. Components reading data from store
+9. Added some helper components
+10. 

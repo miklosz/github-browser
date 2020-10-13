@@ -53,7 +53,7 @@ export const listSlice = createSlice({
     // OR? (state, action: PayloadAction<T>)
     // state.users = action.payload 
     getUsersSuccess: (state, { payload }) => {
-      state.loading = true
+      state.loading = false
       state.errors = false
       state.users = payload
     },

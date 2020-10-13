@@ -1,11 +1,7 @@
 import React from 'react'
 import styles from './shared.module.css'
+import IError from '../../models/error.model'
 
-export interface IError {
-    title: string
-    status: number
-    message: string
-}
 
 const Error = (props: { error: IError }) => {
     const { title, status, message } = props.error

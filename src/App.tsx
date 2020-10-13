@@ -21,7 +21,7 @@ function App() {
       <main>
         <Router>
           <Switch>
-            <Route exact path="/user/:id">
+            <Route exact path="/user/:login">
               <UserView />
             </Route>
             <Route exact path="/">

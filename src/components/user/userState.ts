@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { IUser } from '../../models/user.model'
 import fetchHandler from '../../app/fetch'
-import testData from '../../tests/testData.json'
+import { IUser } from '../../models/user.model'
+import IError from '../../models/error.model'
 
 interface SingleUserState {
-  data: IUser,
   loading: boolean,
-  errors: boolean // maybe change to array of errors later
+  data: IUser,
+  error?: IError
 }
 
 const initialState: SingleUserState = {
   data: {} as IUser,
   loading: false,
-  errors: false
 };
 
 export const userSlice = createSlice({
@@ -25,13 +24,12 @@ export const userSlice = createSlice({
     },
     // OR? (state, action: PayloadAction<T>)
     getSingleUserSuccess: (state, { payload }) => {
-      state.loading = true
-      state.errors = false
+      state.loading = false
       state.data = payload
     },
     getSingleUserFailure: (state, { payload }) => {
       state.loading = false
-      state.errors = true
+      state.error = payload
     },
   },
 });
@@ -43,7 +41,7 @@ export const fetchSingleUser = (login) => {
     // maybe just add the code from fetchHandler here?
 
     const fetchedData = await fetchHandler(`users/${login}`)
-    if (fetchedData.error) { // if changed to string - pass payload here and actually show errors
+    if (fetchedData.error) { // if changed to string - pass payload here and actually show error
       dispatch(getSingleUserFailure(fetchedData.error))
     } else {
       dispatch(getSingleUserSuccess(fetchedData))
