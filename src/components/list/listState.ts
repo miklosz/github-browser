@@ -78,7 +78,7 @@ export const fetchUsersList = () => {
 
     // maybe just add the code from fetchHandler here?
 
-    const fetchedData = await fetchHandler('https://api.github.com/users')
+    const fetchedData = await fetchHandler('users')
     if (fetchedData.error) { // if changed to string - pass payload here and actually show errors
       dispatch(getUsersFailure(fetchedData.error))
     } else {

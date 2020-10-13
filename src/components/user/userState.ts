@@ -42,7 +42,7 @@ export const fetchSingleUser = (login) => {
 
     // maybe just add the code from fetchHandler here?
 
-    const fetchedData = await fetchHandler(`https://api.github.com/users/${login}`)
+    const fetchedData = await fetchHandler(`users/${login}`)
     if (fetchedData.error) { // if changed to string - pass payload here and actually show errors
       dispatch(getSingleUserFailure(fetchedData.error))
     } else {
