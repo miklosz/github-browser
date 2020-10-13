@@ -22,10 +22,10 @@ function App() {
         <Router>
           <Switch>
             <Route exact path="/user/:id">
-              <UserView user={testData[0]} />
+              <UserView />
             </Route>
             <Route exact path="/">
-              <ListView users={testData} />
+              <ListView />
             </Route>
           </Switch>
         </Router>

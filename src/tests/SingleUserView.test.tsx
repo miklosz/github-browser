@@ -1,15 +1,16 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import UserView from '../components/user/UserView'
+import testData from './testData.json'
 import { Provider } from 'react-redux';
 import { store } from '../app/store';
-import App from '../App';
 
 test('Renders ', () => {
   const { getByText } = render(
     <Provider store={store}>
-      <App />
+      <UserView user={testData[0]} />
     </Provider>
   );
 
-  expect(getByText('Github users browser')).toBeInTheDocument();
+  expect(getByText('mojombo')).toBeInTheDocument();
 });

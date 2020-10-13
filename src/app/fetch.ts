@@ -1,9 +1,4 @@
-export const fetchHandler = async (url: string) => {
-    // will handle fetch and return data
-
-    // List users: https://api.github.com/users
-    // Single user: https://api.github.com/user/{login}
-
+export default async function fetchHandler (url: string) {
     const response = await fetch(url)
     let data
 

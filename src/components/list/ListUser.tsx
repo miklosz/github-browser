@@ -1,7 +1,8 @@
 import React from 'react'
 import UserImage from '../user/UserImage'
+import { IUser }from '../../models/user.model'
 
-const ListUser = props => {
+const ListUser = ( props : { user: IUser }  ) => {
     const { user } = props
     return (
         <li>
