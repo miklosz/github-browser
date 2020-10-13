@@ -1,26 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { IUserList } from '../../models/list.model'
+import { IUser } from '../../models/user.model'
+import IError from '../../models/error.model'
 import fetchHandler from '../../app/fetch'
 
-import testData from '../../tests/testData.json'
+// import testData from '../../tests/testData.json'
 
 /* TODO 
 Implement pagination using link-headers
 https://developer.github.com/v3/#link-header
 */
 
-//temp for testing
-const testUsers = testData.map(i => ({
-  login: i.login,
-  id: i.id,
-  avatar_url: i.avatar_url,
-  url: i.url,
-  html_url: i.html_url
-}))
-
 interface ListState {
-  users: Array<IUserList>,
+  users: IUser[],
   pagination: {
     page: number,
     firstId: number,
@@ -28,19 +20,20 @@ interface ListState {
     perPage: number
   },
   loading: boolean,
-  errors: boolean // maybe change to array of errors later
+  error?: IError,
+  nextPageLink?: string
 }
 
 const initialState: ListState = {
-  users: [] as Array<IUserList>,
+  users: [] as IUser[],
   pagination: {
     page: 1,
     firstId: 1,
     lastId: 0, // that's unknown initially - not always firstId + 30 (gaps in id's)
-    perPage: 30
+    perPage: 30,
   },
   loading: false,
-  errors: false
+
 };
 
 export const listSlice = createSlice({
@@ -50,23 +43,20 @@ export const listSlice = createSlice({
     getUsers: state => {
       state.loading = true
     },
-    // OR? (state, action: PayloadAction<T>)
-    // state.users = action.payload 
-    getUsersSuccess: (state, { payload }) => {
+    getUsersSuccess: (state, action: PayloadAction<IUser[]>) => {
       state.loading = false
-      state.errors = false
-      state.users = payload
+      state.users = action.payload
     },
-    getUsersFailure: (state, { payload }) => {
+    getUsersFailure: (state, action: PayloadAction<IError>) => {
       state.loading = false
-      state.errors = true
+      state.error = action.payload
     },
     nextPage: state => {
-      state.users = [testUsers]
+      // state.users = [nextPageUsers]
       state.pagination.page = state.pagination.page + 1
     },
     prevPage: state => {
-      state.users = [testUsers]
+      // state.users = [prevPageUsers]
       state.pagination.page = state.pagination.page - 1
     }
   },
@@ -75,8 +65,6 @@ export const listSlice = createSlice({
 export const fetchUsersList = () => {
   return async dispatch => {
     dispatch(getUsers())
-
-    // maybe just add the code from fetchHandler here?
 
     const fetchedData = await fetchHandler('users')
     if (fetchedData.error) { // if changed to string - pass payload here and actually show errors

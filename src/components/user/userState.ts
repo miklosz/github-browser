@@ -22,14 +22,14 @@ export const userSlice = createSlice({
     getSingleUser: state => {
       state.loading = true
     },
-    // OR? (state, action: PayloadAction<T>)
-    getSingleUserSuccess: (state, { payload }) => {
+
+    getSingleUserSuccess: (state, action: PayloadAction<IUser>)=> {
       state.loading = false
-      state.data = payload
+      state.data = action.payload
     },
-    getSingleUserFailure: (state, { payload }) => {
+    getSingleUserFailure: (state, action: PayloadAction<IError>) => {
       state.loading = false
-      state.error = payload
+      state.error = action.payload
     },
   },
 });

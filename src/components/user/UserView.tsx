@@ -6,14 +6,13 @@ import UserImage from '../shared/UserImage'
 import Error from '../shared/Error'
 import Loader from '../shared/Loader'
 
-import { IUser } from '../../models/user.model'
 import { fetchSingleUser, selectUser } from './userState';
 
 /* TODO 
     verify if paramLogin === login (some edge-case scenario, like store not being reloaded properly )
 */
 
-const UserView = props => {
+const UserView = () => {
     const { login: paramLogin } = useParams();
     const { data, loading, error } = useSelector(selectUser)
     const { id, name, login, avatar_url } = data
@@ -25,8 +24,6 @@ const UserView = props => {
 
     return (
         <div>
-            
-            <pre>{ JSON.stringify(error, null, 2) }</pre>
             { loading ?
                 <Loader />
                 : error ?

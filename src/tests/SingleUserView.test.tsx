@@ -1,13 +1,14 @@
 import React from 'react';
-import { Router, Route, MemoryRouter  } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 import { render, screen, waitFor, waitForElementToBeRemoved  } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { createMemoryHistory } from 'history'
 
 import UserView from '../components/user/UserView'
-import testData from './testData.json'
 import { Provider } from 'react-redux';
 import { store } from '../app/store';
+
+// import testData from './testData.json'
 
  test('Renders single user page', async () => {
     const route = '/user/miklosz'
