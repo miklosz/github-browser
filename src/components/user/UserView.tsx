@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
-import UserImage from './UserImage'
+import UserImage from '../shared/UserImage'
 import { IUser } from '../../models/user.model'
 import { fetchSingleUser, selectUser } from './userState';
 

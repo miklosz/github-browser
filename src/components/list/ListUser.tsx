@@ -1,5 +1,5 @@
 import React from 'react'
-import UserImage from '../user/UserImage'
+import UserImage from '../shared/UserImage'
 import { IUser }from '../../models/user.model'
 
 const ListUser = ( props : { user: IUser }  ) => {
