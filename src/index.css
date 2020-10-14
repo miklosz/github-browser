@@ -5,9 +5,24 @@ a:hover {
 }
 
 .appRoot {
-  display: grid;
+  display: flex;
+  flex-flow: column nowrap;
   max-width: 1000px;
   width: 100%;
   padding: 1rem;
   margin: 0 auto;
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem;
+  background: var(--blue);
+  border: 2px solid var(--blue);
+  color: rgb(255,255,255)
+}
+
+.btn:hover {
+  background: var(--blue-alpha);
+  border: 2px solid var(--blue);
+  color: var(--blue);
 }

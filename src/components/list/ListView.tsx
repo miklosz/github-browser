@@ -19,19 +19,18 @@ const ListView = () => {
 
     return (
         <div className={styles.container}>
+            <h1>Browse GitHub users</h1>
             { loading ?
                 <Loader />
                 : error ?
                     <Error error={error} />
                     :
-                    <>
-                        <h1>Browse GitHub users</h1>
-                        <ul>
-                            {users && users.map((user: IUser) =>
-                                <ListUser user={user} key={user.id} />
-                            )}
-                        </ul>
-                    </>
+                    <ul>
+                        {users && users.map((user: IUser) =>
+                            <ListUser user={user} key={user.id} />
+                        )}
+                    </ul>
+
             }
         </div>
     )

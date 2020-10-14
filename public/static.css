@@ -1,10 +1,15 @@
 :root {
     --red: rgb(240, 80, 70);
+    --red-alpha: rgba(240, 80, 70, 0.5);
     --green: rgb(117, 184, 67);
+    --green-alpha: rgba(117, 184, 67, 0.5);
     --blue: rgb(0, 160, 222);
+    --blue-alpha: rgba(0, 160, 222, 0.5);
     --purple: rgb(202, 79, 151);
     --yellow: rgb(249, 177, 35);
+    --yellow-alpha: rgb(249, 177, 35, 0.5);
     --text-color: rgb(30, 30, 30);
+    --breakpoint: 600px
 }
 
 * {

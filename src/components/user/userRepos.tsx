@@ -7,7 +7,6 @@ interface IUserReposProps  {
 }
 
 const UserRepos = (props : IUserReposProps) => {
-  // useEffect with dispatch to fetch user repos here
   const { repos, reposCount } = props
   return (
         <section className="repositories">

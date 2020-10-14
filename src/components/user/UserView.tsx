@@ -8,17 +8,9 @@ import Error from '../shared/Error'
 import Loader from '../shared/Loader'
 
 import { fetchSingleUser, fetchRepos, selectUser, selectRepos } from './userState';
-import { IUser } from '../../models/user.model';
-
-/* TODO 
-    verify if paramLogin === login (some edge-case scenario, like store not being reloaded properly )
-*/
-interface IParams {
-    login: string
-}
 
 const UserView = () => {
-    const { login: paramLogin }: IParams = useParams();
+    const { login: paramLogin } : { login: string } = useParams();
     const { currentUser: data, loading, error } = useSelector(selectUser)
     const repos  = useSelector(selectRepos)
 
@@ -45,7 +37,7 @@ const UserView = () => {
                             }
                         </>
                     }
-                    <Link to="/">Go back to list</Link>
+                    <Link to="/" className="btn btn-back">Go back to list</Link>
                 </>
             }
         </div>

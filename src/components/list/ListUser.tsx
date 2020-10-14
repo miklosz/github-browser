@@ -5,13 +5,13 @@ import styles from './List.module.css'
 
 const ListUser = ( props : { user: IUser }  ) => {
     const { user } = props
+    const { avatar_url, login } = user
     return (
         <li className={styles.listEntry}>
-            <a href={`/user/${user.login}`} >
-                <UserImage imageUrl={user.avatar_url} imageAlt={`${user.login}'s avatar`} />
+            <a href={`/user/${login}`} >
+                <UserImage imageUrl={avatar_url} imageAlt={`${login}'s avatar`} />
                 <div>
                     <h2>{ user.login }</h2>
-                    <p>Additional info about user can be displayed here</p>
                 </div>
             </a>
         </li>
