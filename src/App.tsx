@@ -10,7 +10,6 @@ import {
 import UserView from './components/user/UserView'
 import ListView from './components/list/ListView'
 import Search from './components/shared/Search';
-import testData from './tests/testData.json'
 
 function App() {
   return (

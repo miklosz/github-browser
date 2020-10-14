@@ -1,0 +1,51 @@
+.container {
+    display: grid;
+    grid-template: 100% / auto;
+}
+
+ul {
+    padding: 0
+}
+
+.listEntry {
+    list-style: none;
+    margin-bottom: 1rem;
+    box-shadow: rgba(0,0,0,.25) 1px 1px 3px;
+}
+
+.listEntry a {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid var(--text-color)
+}
+
+.listEntry:nth-child(5n-4) a:hover {
+    background: var(--red);
+}
+
+.listEntry:nth-child(5n-3) a:hover {
+    background: var(--green);
+}
+.listEntry:nth-child(5n-2) a:hover {
+    background: var(--blue);
+}
+.listEntry:nth-child(5n-1) a:hover {
+    background: var(--purple);
+}
+.listEntry:nth-child(5n) a:hover {
+    background: var(--yellow);
+}
+
+.listEntry a div {
+    flex-basis: 75%;
+    padding: 1rem 1rem 1rem 2rem;
+}
+
+.listEntry img {
+    flex-basis: 300px;
+    height: auto;
+    border-radius: 50%;
+}

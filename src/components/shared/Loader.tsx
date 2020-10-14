@@ -2,8 +2,9 @@ import React from 'react'
 
 const Error = () => {
     return (
-        <div>
-            Loading...
+        <div className="fullWindow">
+            <p>Loading...</p>
+            <div className="loader"></div>
         </div>
     )
 }

@@ -5,11 +5,11 @@ import Error from '../shared/Error'
 import Loader from '../shared/Loader'
 import { selectList, fetchUsersList } from './listState';
 import { IUser } from '../../models/user.model'
+import styles from './List.module.css'
 
 
 const ListView = () => {
     const { users, pagination, loading, error } = useSelector(selectList)
-    // const state = useSelector(selectList);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,14 +18,14 @@ const ListView = () => {
 
 
     return (
-        <div>
+        <div className={styles.container}>
             { loading ?
                 <Loader />
                 : error ?
                     <Error error={error} />
                     :
                     <>
-                        <h1>Github users browser</h1>
+                        <h1>Browse Github users</h1>
                         <ul>
                             {users && users.map((user: IUser) =>
                                 <ListUser user={user} key={user.id} />
