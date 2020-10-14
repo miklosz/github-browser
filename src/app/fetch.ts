@@ -9,7 +9,7 @@ export default async function fetchHandler (path: string) {
     } else {
         data = {
             error: {
-                title: 'Failed to fetch data from Github API',
+                title: 'Failed to fetch data from GitHub API',
                 status: response.status,
                 message: response.statusText
             }

@@ -11,5 +11,5 @@ test('Renders ', () => {
       <ListView users={testData} />
     </Provider>
   );
-  expect(getByText('Github users browser')).toBeInTheDocument();
+  expect(getByText('GitHub users browser')).toBeInTheDocument();
 });

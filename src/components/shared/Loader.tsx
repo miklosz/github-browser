@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Error = () => {
+const Loader = () => {
     return (
         <div className="fullWindow">
             <p>Loading...</p>
@@ -9,4 +9,4 @@ const Error = () => {
     )
 }
 
-export default Error
+export default Loader

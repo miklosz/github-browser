@@ -5,20 +5,24 @@
 /.pnp
 .pnp.js
 
+# task runner
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # testing
 /coverage
 
 # production
 /build
 
-# misc
-.DS_Store
+# settings
+.vscode/*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# misc
+.DS_Store
 /.notes

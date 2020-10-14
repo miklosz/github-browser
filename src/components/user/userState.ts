@@ -2,16 +2,18 @@ import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import fetchHandler from '../../app/fetch'
 import { IUser } from '../../models/user.model'
-import IError from '../../models/error.model'
+import { IError } from '../../models/error.model'
+import { IRepo } from '../../models/repo.model'
 
 interface SingleUserState {
   loading: boolean,
-  data: IUser,
-  error?: IError
+  currentUser: IUser,
+  error?: IError,
+  userRepos?: IRepo
 }
 
 const initialState: SingleUserState = {
-  data: {} as IUser,
+  currentUser: {} as IUser,
   loading: false,
 };
 
@@ -25,11 +27,22 @@ export const userSlice = createSlice({
 
     getSingleUserSuccess: (state, action: PayloadAction<IUser>)=> {
       state.loading = false
-      state.data = action.payload
+      state.currentUser = action.payload
     },
     getSingleUserFailure: (state, action: PayloadAction<IError>) => {
       state.loading = false
       state.error = action.payload
+    },
+    getRepos: state => {
+      state.loading = true
+    },
+    getReposSuccess: (state, action: PayloadAction<IRepo>)=> {
+      state.loading = false
+      state.userRepos = action.payload
+    },
+    getReposFailure: (state, action: PayloadAction<IRepo>) => {
+      state.loading = false
+      state.userRepos = action.payload
     },
   },
 });

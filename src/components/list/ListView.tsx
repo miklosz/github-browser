@@ -25,7 +25,7 @@ const ListView = () => {
                     <Error error={error} />
                     :
                     <>
-                        <h1>Browse Github users</h1>
+                        <h1>Browse GitHub users</h1>
                         <ul>
                             {users && users.map((user: IUser) =>
                                 <ListUser user={user} key={user.id} />
