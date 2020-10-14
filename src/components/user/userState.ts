@@ -9,7 +9,7 @@ interface SingleUserState {
   loading: boolean,
   currentUser: IUser,
   error?: IError,
-  userRepos?: IRepo
+  userRepos?: IRepo[]
 }
 
 const initialState: SingleUserState = {
@@ -24,7 +24,6 @@ export const userSlice = createSlice({
     getSingleUser: state => {
       state.loading = true
     },
-
     getSingleUserSuccess: (state, action: PayloadAction<IUser>)=> {
       state.loading = false
       state.currentUser = action.payload
@@ -36,11 +35,11 @@ export const userSlice = createSlice({
     getRepos: state => {
       state.loading = true
     },
-    getReposSuccess: (state, action: PayloadAction<IRepo>)=> {
+    getReposSuccess: (state, action: PayloadAction<IRepo[]>)=> {
       state.loading = false
       state.userRepos = action.payload
     },
-    getReposFailure: (state, action: PayloadAction<IRepo>) => {
+    getReposFailure: (state, action: PayloadAction<IRepo[]>) => {
       state.loading = false
       state.userRepos = action.payload
     },
@@ -50,11 +49,8 @@ export const userSlice = createSlice({
 export const fetchSingleUser = (login: string) => {
   return async ( dispatch : Dispatch ) => {
     dispatch(getSingleUser())
-
-    // maybe just add the code from fetchHandler here?
-
     const fetchedData = await fetchHandler(`users/${login}`)
-    if (fetchedData.error) { // if changed to string - pass payload here and actually show error
+    if (fetchedData.error) {
       dispatch(getSingleUserFailure(fetchedData.error))
     } else {
       dispatch(getSingleUserSuccess(fetchedData))
@@ -62,11 +58,31 @@ export const fetchSingleUser = (login: string) => {
   }
 }
 
+export const fetchRepos = (login: string) => {
+  return async ( dispatch : Dispatch ) => {
+    dispatch(getRepos())
+    const fetchedData = await fetchHandler(`users/${login}/repos`)
+    if (fetchedData.error) {
+      dispatch(getReposFailure(fetchedData.error))
+    } else {
+      dispatch(getReposSuccess(fetchedData))
+    }
+  }
+}
+
 // actions
-export const { getSingleUser, getSingleUserSuccess, getSingleUserFailure } = userSlice.actions
+export const { 
+  getSingleUser,
+  getSingleUserSuccess,
+  getSingleUserFailure,
+  getRepos,
+  getReposSuccess,
+  getReposFailure
+} = userSlice.actions
 
 // selector (returns state like useState() )
 export const selectUser = (state: RootState) => state.singleUser;
+export const selectRepos = (state: RootState) => state.singleUser.userRepos;
 
 // reducer itself
 export default userSlice.reducer;

@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
-import { useParams, Link } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useParams, Link } from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
 
 import UserDetails from './userDetails'
 import UserRepos from './userRepos'
 import Error from '../shared/Error'
 import Loader from '../shared/Loader'
 
-import { fetchSingleUser, selectUser } from './userState';
+import { fetchSingleUser, fetchRepos, selectUser, selectRepos } from './userState';
 import { IUser } from '../../models/user.model';
 
 /* TODO 
@@ -20,11 +20,13 @@ interface IParams {
 const UserView = () => {
     const { login: paramLogin }: IParams = useParams();
     const { currentUser: data, loading, error } = useSelector(selectUser)
+    const repos  = useSelector(selectRepos)
 
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(fetchSingleUser(paramLogin))
+        dispatch(fetchRepos(paramLogin))
     }, [dispatch, paramLogin])
 
     return (
@@ -39,7 +41,7 @@ const UserView = () => {
                         <>
                             <UserDetails data={data} />
                             { (data.public_repos > 0) &&
-                                <UserRepos reposUrl={data.repos_url} reposCount={data.public_repos}/>
+                                <UserRepos repos={repos} reposCount={data.public_repos}/>
                             }
                         </>
                     }
