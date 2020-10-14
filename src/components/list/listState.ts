@@ -1,39 +1,32 @@
-import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Dispatch, Selector } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { IUser } from '../../models/user.model'
 import IError from '../../models/error.model'
 import fetchHandler from '../../app/fetch'
 
-// import testData from '../../tests/testData.json'
+import testData from '../../tests/testData.json'
 
-/* TODO 
-Implement pagination using link-headers
-https://developer.github.com/v3/#link-header
-*/
 
-interface ListState {
+export interface IListPage {
+  pageNumber: number,
   users: IUser[],
-  pagination: {
-    page: number,
-    firstId: number,
-    lastId: number
-    perPage: number
-  },
-  loading: boolean,
-  error?: IError,
+  firstId: number,
+  lastId: number | undefined,
   nextPageLink?: string
 }
 
-const initialState: ListState = {
-  users: [] as IUser[],
-  pagination: {
-    page: 1,
-    firstId: 1,
-    lastId: 0, // that's unknown initially - not always firstId + 30 (gaps in id's)
-    perPage: 30,
-  },
-  loading: false,
 
+export interface IListState {
+  currentPage: number,
+  loading: boolean,
+  error?: IError,
+  pages: IListPage[]
+}
+
+const initialState: IListState = {
+  currentPage: 0,
+  pages: [],
+  loading: false,
 };
 
 export const listSlice = createSlice({
@@ -45,41 +38,78 @@ export const listSlice = createSlice({
     },
     getUsersSuccess: (state, action: PayloadAction<IUser[]>) => {
       state.loading = false
-      state.users = action.payload
+      state.pages.push({
+        users: action.payload,
+        firstId: action.payload[0].id,
+        lastId: action.payload[action.payload.length - 1].id,
+        pageNumber: state.pages.length
+      })
+      state.currentPage = state.pages.length - 1
     },
     getUsersFailure: (state, action: PayloadAction<IError>) => {
       state.loading = false
       state.error = action.payload
     },
-    nextPage: state => {
-      // state.users = [nextPageUsers]
-      state.pagination.page = state.pagination.page + 1
+    nextPage: (state) => {
+      state.currentPage = state.currentPage + 1
     },
-    prevPage: state => {
-      // state.users = [prevPageUsers]
-      state.pagination.page = state.pagination.page - 1
+    prevPage: (state) => {
+      state.currentPage = state.currentPage - 1
+    },
+    setPage: (state, action: PayloadAction<number>) =>{
+      state.currentPage = action.payload
+      state.loading = false
     }
   },
 });
 
-export const fetchUsersList = () => {
-  return async (dispatch : Dispatch) => {
-    dispatch(getUsers())
 
-    const fetchedData = await fetchHandler('users')
-    if (fetchedData.error) { // if changed to string - pass payload here and actually show errors
-      dispatch(getUsersFailure(fetchedData.error))
-    } else {
-      dispatch(getUsersSuccess(fetchedData))
+const checkIfPageExists = (pageNumber : number, state: RootState ) => {
+  return state.users.pages.find(p => p.pageNumber === pageNumber) !== undefined
+}
+
+export const fetchUsersList = (requestedPage = 0) => {
+  return async (dispatch: Dispatch, getState: () => RootState) => {
+    dispatch(getUsers())
+    const state = getState()
+
+    if (!checkIfPageExists(requestedPage, state)) {
+      const since =  state.users.pages[state.users.currentPage]
+        ? state.users.pages[state.users.currentPage].lastId
+        : 0
+      const fetchedData = await fetchHandler(`users?since=${since}`)
+      if (fetchedData.error) {
+        dispatch(getUsersFailure(fetchedData.error))
+      } else {
+        dispatch(getUsersSuccess(fetchedData))
+      }
     }
+    else {
+      dispatch(setPage(requestedPage))
+    }
+
   }
 }
 
 // actions
-export const { getUsers, getUsersSuccess, getUsersFailure, nextPage, prevPage } = listSlice.actions
+export const { getUsers, getUsersSuccess, getUsersFailure, nextPage, prevPage, setPage } = listSlice.actions
 
 // selector (returns state like useState() )
-export const selectList = (state: RootState) => state.users;
+// const getFirstIdOnPage = (page: number, state: RootState) => {
+//   state.users.pages[]
+// }
+
+
+
+export const selectList = (state: RootState) => {
+  return ({
+    //users: state.users.pages[state.users.currentPage].users,
+    users: state.users.pages ? state.users.pages[state.users.currentPage]?.users : undefined,
+    currentPage: state.users.currentPage,
+    loading: state.users.loading,
+    error: state.users.error
+  })
+} 
 
 // reducer itself
 export default listSlice.reducer;

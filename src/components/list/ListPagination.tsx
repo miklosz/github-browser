@@ -1,6 +1,12 @@
 import React from 'react'
 
-const ListPagination = () =>
-    <>Pagination</>
+const ListPagination = () => {
+    return(
+        <div className="pagination">
+            <button>prev</button>
+            <button>next</button>
+        </div>
+    )
+}
   
 export default ListPagination

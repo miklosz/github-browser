@@ -23,7 +23,7 @@ function App() {
             <Route exact path="/user/:login">
               <UserView />
             </Route>
-            <Route exact path="/">
+            <Route path="/:page?">
               <ListView />
             </Route>
           </Switch>
