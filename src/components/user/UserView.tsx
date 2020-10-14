@@ -11,9 +11,12 @@ import { fetchSingleUser, selectUser } from './userState';
 /* TODO 
     verify if paramLogin === login (some edge-case scenario, like store not being reloaded properly )
 */
+interface IParams {
+    login: string
+}
 
 const UserView = () => {
-    const { login: paramLogin } = useParams();
+    const { login: paramLogin } : IParams = useParams();
     const { data, loading, error } = useSelector(selectUser)
     const { id, name, login, avatar_url } = data
     const dispatch = useDispatch();

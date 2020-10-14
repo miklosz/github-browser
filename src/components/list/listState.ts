@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { IUser } from '../../models/user.model'
 import IError from '../../models/error.model'
@@ -63,7 +63,7 @@ export const listSlice = createSlice({
 });
 
 export const fetchUsersList = () => {
-  return async dispatch => {
+  return async (dispatch : Dispatch) => {
     dispatch(getUsers())
 
     const fetchedData = await fetchHandler('users')

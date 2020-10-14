@@ -7,7 +7,7 @@ import { selectList, fetchUsersList } from './listState';
 import { IUser } from '../../models/user.model'
 
 
-const ListView = (props) => {
+const ListView = () => {
     const { users, pagination, loading, error } = useSelector(selectList)
     // const state = useSelector(selectList);
     const dispatch = useDispatch();

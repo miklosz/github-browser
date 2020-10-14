@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import fetchHandler from '../../app/fetch'
 import { IUser } from '../../models/user.model'
@@ -34,8 +34,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const fetchSingleUser = (login) => {
-  return async dispatch => {
+export const fetchSingleUser = (login: string) => {
+  return async ( dispatch : Dispatch ) => {
     dispatch(getSingleUser())
 
     // maybe just add the code from fetchHandler here?
