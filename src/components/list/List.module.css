@@ -1,4 +1,19 @@
-ul {
+.nav  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prev {
+    order: -1
+}
+
+.heading {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.listView ul {
     padding: 0
 }
 
@@ -17,7 +32,6 @@ ul {
     border: 1px solid var(--text-color);
     overflow: hidden;
 }
-
 
 .listEntry:nth-child(5n-4) a:hover {
     background: var(--red);

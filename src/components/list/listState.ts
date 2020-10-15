@@ -1,11 +1,8 @@
-import { createSlice, PayloadAction, Dispatch, Selector } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, Dispatch } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { IUser } from '../../models/user.model'
 import IError from '../../models/error.model'
 import fetchHandler from '../../app/fetch'
-
-import testData from '../../tests/testData.json'
-
 
 export interface IListPage {
   pageNumber: number,
@@ -68,7 +65,7 @@ const checkIfPageExists = (pageNumber : number, state: RootState ) => {
   return state.users.pages.find(p => p.pageNumber === pageNumber) !== undefined
 }
 
-export const fetchUsersList = (requestedPage = 0) => {
+export const fetchUsersList = (requestedPage: number) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     dispatch(getUsers())
     const state = getState()
@@ -93,12 +90,6 @@ export const fetchUsersList = (requestedPage = 0) => {
 
 // actions
 export const { getUsers, getUsersSuccess, getUsersFailure, nextPage, prevPage, setPage } = listSlice.actions
-
-// selector (returns state like useState() )
-// const getFirstIdOnPage = (page: number, state: RootState) => {
-//   state.users.pages[]
-// }
-
 
 
 export const selectList = (state: RootState) => {

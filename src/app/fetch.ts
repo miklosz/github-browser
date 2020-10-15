@@ -3,7 +3,7 @@ export default async function fetchHandler (path: string) {
     const baseUrl = 'https://api.github.com/';
     const options = {
         headers : {
-            Authorization: 'token 71f6b5e111ddbee4177eb8fcd1770bec13b96d57',
+            Authorization: `${process.env.REACT_APP_GH_TOKEN}`,
             accept: 'application/vnd.github.v3+json'
         }
     }

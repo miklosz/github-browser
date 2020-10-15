@@ -7,6 +7,8 @@ import UserRepos from './userRepos'
 import Error from '../shared/Error'
 import Loader from '../shared/Loader'
 
+import styles from './user.module.css'
+
 import { fetchSingleUser, fetchRepos, selectUser, selectRepos } from './userState';
 
 const UserView = () => {
@@ -22,7 +24,7 @@ const UserView = () => {
     }, [dispatch, paramLogin])
 
     return (
-        <div>
+        <div className={styles.userDetailsView}>
             { loading ?
                 <Loader />
                 : 

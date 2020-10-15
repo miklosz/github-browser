@@ -1,0 +1,28 @@
+.userDetailsView {
+    padding: 1rem;
+    border: 1px solid var(--text-color);
+    overflow: hidden;
+}
+
+.header {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(200px,1fr) 1fr;
+    place-items: center;
+}
+
+.header div {
+    padding-left: 1rem;
+}
+
+.back {
+    place-self: start;
+}
+
+.gh {
+    place-self: end;
+}
+
+.repoListItem a {
+    display: block;
+}

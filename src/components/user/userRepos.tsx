@@ -1,5 +1,6 @@
 import React from 'react'
 import { IRepo } from '../../models/repo.model'
+import styles from './user.module.css'
 
 interface IUserReposProps  {
   reposCount: number,
@@ -13,7 +14,7 @@ const UserRepos = (props : IUserReposProps) => {
             <h2>Public repositiories ({reposCount})</h2>
             <ul>
               { repos && repos.length > 0 && repos.map((repo: IRepo) =>
-                <ListItem repo={repo} />
+                <ListItem repo={repo}  key={repo.name} />
               )}
             </ul>
         </section>
@@ -21,16 +22,19 @@ const UserRepos = (props : IUserReposProps) => {
 }
 
 const ListItem = (props: { repo: IRepo }) => {
-  const { name, description, html_url, language, updated } = props.repo
+  const { name, description, html_url, language } = props.repo
   return (
-    <li>
-      <a href={html_url} title="View repository on GitHub" >
-        <h3>{name}</h3>
-        <p>{description}</p>
+    <li className={styles.repoListItem}>
+      <a href={html_url} title="View repository on GitHub" target="_blank" rel="noopener noreferrer" >
+        {name && 
+          <h3>{name}</h3>
+        }
+        {description &&
+          <p>{description}</p>
+        }
         {language &&
           <p>{language}</p>
         }
-        <p>{updated}</p>
       </a>
     </li>
   )

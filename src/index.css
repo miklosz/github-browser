@@ -18,11 +18,23 @@ a:hover {
   padding: 1rem;
   background: var(--blue);
   border: 2px solid var(--blue);
-  color: rgb(255,255,255)
+  color: rgb(255,255,255);
+  cursor: pointer
 }
 
 .btn:hover {
   background: var(--blue-alpha);
   border: 2px solid var(--blue);
   color: var(--blue);
+}
+
+.btn-alt {
+  background: var(--green);
+  border: 2px solid var(--green);
+}
+
+.btn-alt:hover {
+  background: var(--green-alpha);
+  border: 2px solid var(--green);
+  color: var(--text-color)
 }

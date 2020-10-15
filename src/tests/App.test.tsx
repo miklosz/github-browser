@@ -11,5 +11,5 @@ test('Renders the App with name', () => {
     </Provider>
   );
 
-  expect(getByText('GitHub users browser')).toBeInTheDocument();
+  expect(getByText('GitHub users')).toBeInTheDocument();
 });

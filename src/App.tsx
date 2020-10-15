@@ -9,15 +9,11 @@ import {
 // components
 import UserView from './components/user/UserView'
 import ListView from './components/list/ListView'
-import Search from './components/shared/Search';
+// import Search from './components/shared/Search';
 
 function App() {
   return (
     <div className="appRoot">
-      <header>
-        <Search />
-      </header>
-      <main>
         <Router>
           <Switch>
             <Route exact path="/user/:login">
@@ -28,10 +24,9 @@ function App() {
             </Route>
           </Switch>
         </Router>
-
-      </main>
     </div>
   );
 }
+
 
 export default App;
