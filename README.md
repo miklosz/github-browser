@@ -1,3 +1,7 @@
+## STATUS
+This was just a recruitment task. Not updated, not maintainted, saved only for educational purposes
+BTW: You can do way better that that!
+
 ## Boilerplate
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
